@@ -27,6 +27,6 @@
   .page-section p {
     font-size: 5vw; /* Large font size for paragraphs */
     line-height: 1.2;
-    margin: 10px 0 0;
+    /* margin: 10px 0 0; */
   }
   
