@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import MainPage from './pages/MainPage';
+// import MainPage from './pages/MainPage';
 import ItemsPage from './pages/ItemsPage';
 import NaturePage from './pages/NaturePage';
 import QwizPage from './pages/QwizPage';
 import PeoplePage from './pages/PeoplePage';
 import ManufacturePage from './pages/ManufacturePage';
 import SimplePage from './pages/SimplePage';
+import HomepageCanvas from './pages/HomepageCanvas';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -15,7 +16,7 @@ import {
 const router = createBrowserRouter([
   {  
     path: "/",
-    element: <MainPage/>,
+    element: <HomepageCanvas/>,
   },
   {
     path: "/nature", 
