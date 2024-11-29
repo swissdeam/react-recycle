@@ -13,7 +13,7 @@ function NaturePage(){
         <div style={{ 
           minWidth: '300vw', 
           height: '100vh', 
-          backgroundColor: '#BEFFC7',
+          backgroundColor: '#E55934',
           display: 'flex',
           justifyContent: 'flex-start',
           alignItems: 'center'

@@ -19,7 +19,7 @@ const getRandomColor = () => colors[Math.floor(Math.random() * colors.length)];
           <div style={{ 
             minWidth: '300vw', 
             height: '100vh', 
-            backgroundColor: '#BEFFC7',
+            backgroundColor: '#1C1D21',
             display: 'flex',
             justifyContent: 'flex-start',
             alignItems: 'center'

@@ -5,6 +5,7 @@ import product1Image from '../assets/1.png';
 import nature1Image from '../assets/Природа1.png';
 import product2Image from '../assets/Продукция2.png';
 import manufacture3Image from '../assets/Производство3.png';
+import group7Image from '../assets/Group_8.png';
 
 const HomepageCanvas = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -22,12 +23,12 @@ const HomepageCanvas = () => {
 
   // Define tiles with positions, sizes, and levels
   const tiles = [
-    { width: 300, height: 500, color: '#3ABEFF',  link: "/qwiz", offsetX: -600, offsetY: -300, image: product1Image, hoverImageSize: { width: 200, height: 350 } },
-    { width: 300, height: 220, color: "#FFE45E", link: "/manufacture", offsetX: -350, offsetY: -120,image: manufacture3Image, hoverImageSize: { width: 200, height: 200 } },
-    { width: 150, height: 340, color: "#1C1D21", link: "/items", offsetX: -400, offsetY: -50,image: product2Image, hoverImageSize: { width: 200, height: 200 } },
-    { width: 120, height: 180, color: "lightgray", link: "/items", offsetX: -150, offsetY: 50,image: product2Image, hoverImageSize: { width: 200, height: 200 } },
-    { width: 150, height: 210, color: "#E55934", link: "/nature", offsetX: 50, offsetY: 100,image: nature1Image, hoverImageSize: { width: 200, height: 200 } },
-    { width: 130, height: 190, color: "lightblue", link: "/simple", offsetX: 200, offsetY: 50,image: '/path/to/simple-image.png', hoverImageSize: { width: 200, height: 200 } },
+    { width: 273, height: 75, image: group7Image, offsetX: -100, offsetY: 30, isHeader: true, link: 'header' },
+    { width: 158, height: 271, color: "#FFE45E", link: "/manufacture", offsetX: -120, offsetY: -120, image: manufacture3Image, hoverImageSize: { width: 151, height: 265 } },
+    { width: 168, height: 405, color: "#E55934", link: "/nature", offsetX: -300, offsetY: -150, image: nature1Image, hoverImageSize: { width: 56, height: 400 } },
+    { width: 179, height: 296, color: "lightblue", link: "/simple", offsetX: 0, offsetY: 50, image: '/path/to/simple-image.png', hoverImageSize: { width: 200, height: 200 } },
+    { width: 70, height: 375, color: "#1C1D21", link: "/items", offsetX: -170, offsetY: -50, image: product2Image, hoverImageSize: { width: 42, height: 372 } },
+    { width: 175, height: 376, color: '#3ABEFF', link: "/qwiz", offsetX: -450, offsetY: -100, image: product1Image, hoverImageSize: { width: 200, height: 350 } },
   ];
 
   const emojiSets = [
@@ -195,14 +196,16 @@ const HomepageCanvas = () => {
   // Загрузка изображений
   useEffect(() => {
     tiles.forEach(tile => {
-      const img = new window.Image();
-      img.src = tile.image;
-      img.onload = () => {
-        setImages(prev => ({
-          ...prev,
-          [tile.link]: img
-        }));
-      };
+      if (tile.image) {
+        const img = new window.Image();
+        img.src = tile.image;
+        img.onload = () => {
+          setImages(prev => ({
+            ...prev,
+            [tile.isHeader ? 'header' : tile.link]: img
+          }));
+        };
+      }
     });
   }, []);
 
@@ -216,34 +219,46 @@ const HomepageCanvas = () => {
       <Layer>
         {tiles.map((tile, index) => (
           <React.Fragment key={index}>
-            <Rect
-              x={stageWidth / 2 + tile.offsetX}
-              y={stageHeight / 2 + tile.offsetY}
-              width={tile.width}
-              height={tile.height}
-              fill={tile.color}
-              onClick={() => handleTileClick(tile.link)}
-              onMouseEnter={() => setHoveredTile(tile.link)}
-              onMouseLeave={() => setHoveredTile(null)}
-            />
-            <Text
-              x={stageWidth / 2 + tile.offsetX}
-              y={stageHeight / 2 + tile.offsetY + tile.height + 10}
-              text={tile.label}
-              fontSize={18}
-              fill="black"
-              width={tile.width}
-              align="center"
-            />
-            {/* Hover Image */}
-            {hoveredTile === tile.link && images[tile.link] && (
+            {tile.isHeader ? (
               <Image
-                x={stageWidth / 2 + tile.offsetX + (tile.width - tile.hoverImageSize.width) / 2}
-                y={stageHeight / 2 + tile.offsetY + (tile.height - tile.hoverImageSize.height) / 2}
-                image={images[tile.link]}
-                width={tile.hoverImageSize.width}
-                height={tile.hoverImageSize.height}
+                x={stageWidth / 2 + tile.offsetX}
+                y={tile.offsetY}
+                image={images['header']}
+                width={tile.width}
+                height={tile.height}
               />
+            ) : (
+              <>
+                <Rect
+                  x={stageWidth / 2 + tile.offsetX}
+                  y={stageHeight / 2 + tile.offsetY}
+                  width={tile.width}
+                  height={tile.height}
+                  fill={tile.color}
+                  onClick={() => handleTileClick(tile.link)}
+                  onMouseEnter={() => setHoveredTile(tile.link)}
+                  onMouseLeave={() => setHoveredTile(null)}
+                />
+                <Text
+                  x={stageWidth / 2 + tile.offsetX}
+                  y={stageHeight / 2 + tile.offsetY + tile.height + 10}
+                  text={tile.label}
+                  fontSize={18}
+                  fill="black"
+                  width={tile.width}
+                  align="center"
+                />
+                {/* Hover Image */}
+                {hoveredTile === tile.link && images[tile.link] && (
+                  <Image
+                    x={stageWidth / 2 + tile.offsetX + (tile.width - tile.hoverImageSize.width) / 2}
+                    y={stageHeight / 2 + tile.offsetY + (tile.height - tile.hoverImageSize.height) / 2}
+                    image={images[tile.link]}
+                    width={tile.hoverImageSize.width}
+                    height={tile.hoverImageSize.height}
+                  />
+                )}
+              </>
             )}
           </React.Fragment>
         ))}

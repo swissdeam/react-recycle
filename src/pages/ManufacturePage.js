@@ -14,7 +14,7 @@ import React
           <div style={{ 
             minWidth: '1000vw', 
             height: '100vh', 
-            backgroundColor: '#BEFFC7',
+            backgroundColor: '#FFE45E',
             display: 'flex',
             justifyContent: 'flex-start',
             alignItems: 'center'
